@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: nexus-soc-backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/nexussoc}
+    username: ${SPRING_DATASOURCE_USERNAME:nexussoc}
+    password: ${SPRING_DATASOURCE_PASSWORD:nexussoc_secret}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+ml-service:
+  url: ${ML_SERVICE_URL:http://localhost:8000}
+  timeout-seconds: 30
+
+replay:
+  default-speed: ${REPLAY_DEFAULT_SPEED:1}
+  pcap-dir: ${PCAP_DATA_DIR:data/pcap}
+  metrics-interval-ms: 1000
+
+alert:
+  id-prefix: ALT
+  sequence-start: 1
+
+logging:
+  level:
+    com.nexussoc: INFO
+    org.springframework.web: WARN
+    org.hibernate: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
