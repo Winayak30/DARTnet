@@ -19,12 +19,13 @@ function getOrCreateClient(): Client {
   if (stompClient && stompClient.connected) return stompClient;
 
   stompClient = new Client({
-    webSocketFactory: () => new SockJS(WS_URL),
-    reconnectDelay: 3000,
+    webSocketFactory: () => {
+      try { return new SockJS(WS_URL); } catch { return new WebSocket('ws://localhost:__invalid__'); }
+    },
+    reconnectDelay: 5000,
     debug: () => {},
     onConnect: () => {
       console.log('[WS] Connected');
-      // Re-subscribe all pending handlers
       subscribers.forEach((handlers, topic) => {
         if (handlers.size > 0) {
           stompClient!.subscribe(topic, (msg) => {
@@ -37,9 +38,10 @@ function getOrCreateClient(): Client {
       });
     },
     onDisconnect: () => console.log('[WS] Disconnected'),
-    onStompError: (frame) => console.warn('[WS] STOMP error', frame),
+    onStompError: () => {},   // suppress — backend may not be running
+    onWebSocketError: () => {}, // suppress — backend may not be running
   });
-  stompClient.activate();
+  try { stompClient.activate(); } catch { /* backend offline — will retry */ }
   return stompClient;
 }
 

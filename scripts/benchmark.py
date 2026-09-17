@@ -1,5 +1,5 @@
-"""
-NEXUS SOC Benchmark Script
+﻿"""
+DARTNet Benchmark Script
 SIH26145 - Performance measurement tool
 
 Measures:
@@ -22,14 +22,14 @@ import requests
 from datetime import datetime, timezone
 
 def main():
-    parser = argparse.ArgumentParser(description="NEXUS SOC Benchmark")
+    parser = argparse.ArgumentParser(description="DARTNet Benchmark")
     parser.add_argument("--host", default="http://localhost:8080", help="Backend URL")
     parser.add_argument("--scenario", default="DDOS_SYN_FLOOD", help="Scenario to benchmark")
     parser.add_argument("--duration", type=int, default=60, help="Benchmark duration (seconds)")
     parser.add_argument("--speed", type=float, default=5.0, help="Replay speed multiplier")
     args = parser.parse_args()
 
-    print(f"\nNEXUS SOC Benchmark")
+    print(f"\nDARTNet Benchmark")
     print(f"Target: {args.host}")
     print(f"Scenario: {args.scenario}")
     print(f"Duration: {args.duration}s at {args.speed}x speed")

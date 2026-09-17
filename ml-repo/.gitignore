@@ -1,0 +1,19 @@
+# Datasets — never commit
+data/raw/
+data/processed/
+data/external/
+*.csv
+*.parquet
+*.zip
+
+# keep this one
+!data/README.md
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Models
+models/*.joblib
+!models/.gitkeep

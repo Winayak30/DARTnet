@@ -1,4 +1,4 @@
-# NEXUS SOC
+﻿# DARTNet
 ## AI-Based Detection of Cyber Threats in Unidirectional IP Traffic
 
 **SIH Problem Statement:** SIH26145  
@@ -7,9 +7,9 @@
 
 ---
 
-## What is NEXUS SOC?
+## What is DARTNet?
 
-NEXUS SOC is a **passive, AI-assisted network threat detection and security operations platform** that analyzes one-directional IP traffic using only passively collected network metadata. It generates explainable, structured security alerts in near real time.
+DARTNet is a **passive, AI-assisted network threat detection and security operations platform** that analyzes one-directional IP traffic using only passively collected network metadata. It generates explainable, structured security alerts in near real time.
 
 The system is an **observation and intelligence system**, not an active defense system:
 
@@ -29,7 +29,7 @@ In many high-security network environments (government, critical infrastructure)
 - Cannot issue commands to network devices
 - Can only observe packet metadata passively
 
-NEXUS SOC is designed to operate correctly and usefully within these constraints.
+DARTNet is designed to operate correctly and usefully within these constraints.
 
 ---
 
@@ -115,7 +115,7 @@ See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for full details.
 
 ```bash
 git clone <repo>
-cd nexus-soc
+cd dartnet
 
 # Start all services (trains ML models, initializes DB, starts frontend)
 docker compose up --build
@@ -206,10 +206,10 @@ Outputs: packets/sec, throughput Mbps, p50/p95 detection latency, CPU/memory.
 ## Project Structure
 
 ```
-nexus-soc/
+dartnet/
 ├── frontend/          React + TypeScript UI
 ├── backend/           Spring Boot backend
-│   └── src/main/java/com/nexussoc/
+│   └── src/main/java/com/dartnet/
 │       ├── pipeline/  Flow assembly & feature extraction
 │       ├── replay/    Scenario replay engine
 │       ├── service/   Detection orchestrator, alert service
@@ -242,7 +242,7 @@ nexus-soc/
 
 ## Security Notice
 
-NEXUS SOC does **not**:
+DARTNet does **not**:
 - Send probes to observed hosts
 - Ping observed hosts  
 - Initiate connections to observed hosts

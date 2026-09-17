@@ -35,11 +35,12 @@ export default function LiveTrafficPage() {
             { label: 'Threats', value: String(latest?.threatsDetected ?? 0) },
           ].map(({ label, value }) => (
             <div key={label} style={{
-              background: '#fff', border: '1px solid var(--color-border)',
+              background: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
               borderRadius: 8, padding: '14px 18px',
             }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', marginBottom: 6 }}>{label}</div>
-              <div style={{ fontSize: 22, fontWeight: 700, fontFamily: 'var(--font-mono)' }}>{value}</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: 6 }}>{label}</div>
+              <div style={{ fontSize: 22, fontWeight: 700, fontFamily: 'var(--font-mono)', color: 'var(--color-text)' }}>{value}</div>
             </div>
           ))}
         </div>
@@ -50,10 +51,10 @@ export default function LiveTrafficPage() {
           <div style={{ height: 220, padding: '12px 8px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData} margin={{ top: 4, right: 12, left: -10, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="time" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
-                <YAxis tick={{ fontSize: 10 }} />
-                <Tooltip contentStyle={{ fontSize: 12 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="time" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} interval="preserveStartEnd" />
+                <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                <Tooltip contentStyle={{ fontSize: 12, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', color: 'var(--color-text)' }} />
                 <Line type="monotone" dataKey="packets" stroke="#2563eb" strokeWidth={1.5} dot={false} name="Pkt/s" />
                 <Line type="monotone" dataKey="throughput" stroke="#16a34a" strokeWidth={1.5} dot={false} name="Mbps" />
                 <Line type="monotone" dataKey="flows" stroke="#7c3aed" strokeWidth={1.5} dot={false} name="Flows" />

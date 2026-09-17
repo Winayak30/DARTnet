@@ -12,7 +12,7 @@ export default function ReportsPage() {
 
         <ReportCard
           title="Export Alerts — JSON"
-          description="Export all alerts in canonical JSON format matching the NEXUS SOC alert schema."
+          description="Export all alerts in canonical JSON format matching the DARTNet alert schema."
           action="Download JSON"
           onAction={() => exportAlerts('JSON')}
         />
@@ -34,7 +34,7 @@ export default function ReportsPage() {
         <div className="panel">
           <div className="panel-header"><span className="panel-title">Export Format Notes</span></div>
           <div style={{ padding: 16, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.8 }}>
-            <p>• Alert JSON exports use the canonical NEXUS SOC alert schema (SIH26145).</p>
+            <p>• Alert JSON exports use the canonical DARTNet alert schema (SIH26145).</p>
             <p>• Reports contain only observed, measured data — no fabricated metrics.</p>
             <p>• Evidence in reports corresponds to actual detector feature values.</p>
             <p>• All exports contain actual stored data from the PostgreSQL database.</p>

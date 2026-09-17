@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './components/layout/Sidebar';
 import { TopBar } from './components/layout/TopBar';
@@ -92,16 +92,61 @@ function AppInner() {
 
 function PageLoader() {
   return (
-    <div style={{ padding: 40, color: 'var(--color-text-muted)', fontSize: 13 }}>
-      Loading...
+    <div style={{
+      padding: 40,
+      color: '#64748B',
+      fontSize: 13,
+      background: '#0D0D14',
+      height: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ fontSize: 22, marginBottom: 12, color: '#7C3AED' }}>⬡</div>
+        <div>DARTNet — Loading...</div>
+      </div>
     </div>
   );
 }
 
+// Catch any render-time JS errors and show them instead of blank white
+class ErrorBoundary extends Component<{ children: React.ReactNode }, { error: string | null }> {
+  constructor(props: any) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(err: any) {
+    return { error: String(err?.message ?? err) };
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{
+          background: '#0D0D14', color: '#F87171', padding: 32,
+          fontFamily: 'monospace', fontSize: 13, minHeight: '100vh',
+        }}>
+          <div style={{ color: '#EF4444', fontWeight: 700, marginBottom: 12 }}>⚠ Runtime Error</div>
+          <pre style={{ whiteSpace: 'pre-wrap', color: '#CBD5E1' }}>{this.state.error}</pre>
+          <button
+            style={{ marginTop: 16, padding: '6px 14px', background: '#7C3AED', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}
+            onClick={() => window.location.reload()}
+          >
+            Reload
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
   return (
-    <Router>
-      <AppInner />
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <AppInner />
+      </Router>
+    </ErrorBoundary>
   );
 }

@@ -1,0 +1,17 @@
+# Repo-root .dockerignore (used by ml-service build whose context is .)
+.git
+frontend
+backend
+data
+docs
+scripts
+tests
+DARTnet
+*.md
+*.yml
+!docker-compose.yml
+ml-repo/.git
+ml-repo/.venv
+ml-repo/data
+ml-repo/notebooks
+ml-repo/tests

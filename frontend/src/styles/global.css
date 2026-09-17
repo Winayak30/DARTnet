@@ -1,57 +1,71 @@
-/* NEXUS SOC - Global Styles */
-/* Enterprise security operations aesthetic */
+/* DARTNet - Global Styles */
+/* Dark cybersecurity SOC aesthetic — inspired by VigilAI + Blockchain Secure */
 
 :root {
-  /* Palette */
-  --color-sidebar-bg: #1a1e2e;
-  --color-sidebar-border: #2a2f45;
-  --color-topbar-bg: #1e2235;
-  --color-bg: #f4f5f8;
-  --color-surface: #ffffff;
-  --color-surface-2: #f7f8fa;
-  --color-border: #e5e7eb;
-  --color-border-strong: #d1d5db;
-  
-  --color-text: #1f2328;
-  --color-text-secondary: #57606a;
-  --color-text-muted: #8b949e;
-  --color-text-sidebar: #c9d1d9;
-  --color-text-sidebar-muted: #8b949e;
-  
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-light: #eff6ff;
-  
-  /* Severity */
-  --color-critical: #dc2626;
-  --color-critical-bg: #fef2f2;
-  --color-critical-border: #fecaca;
-  --color-high: #ea580c;
-  --color-high-bg: #fff7ed;
-  --color-high-border: #fed7aa;
-  --color-medium: #d97706;
-  --color-medium-bg: #fffbeb;
-  --color-medium-border: #fde68a;
-  --color-low: #2563eb;
-  --color-low-bg: #eff6ff;
-  --color-low-border: #bfdbfe;
-  --color-healthy: #16a34a;
-  --color-healthy-bg: #f0fdf4;
-  
-  /* Status */
-  --color-up: #16a34a;
-  --color-down: #dc2626;
-  --color-degraded: #d97706;
-  --color-unknown: #6b7280;
-  
-  /* Spacing */
+  /* ── Canvas & Surfaces ── */
+  --color-bg: #0D0D14;
+  --color-surface: #13111C;
+  --color-surface-2: #1A1830;
+  --color-surface-3: #211E35;
+  --color-border: #2A2540;
+  --color-border-strong: #3D3860;
+
+  /* ── Sidebar / TopBar ── */
+  --color-sidebar-bg: #0F0D1A;
+  --color-sidebar-border: #1E1B2E;
+  --color-topbar-bg: #13111C;
+
+  /* ── Text ── */
+  --color-text: #F8FAFC;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted: #64748B;
+  --color-text-sidebar: #E2E8F0;
+  --color-text-sidebar-muted: #64748B;
+
+  /* ── Accent ── */
+  --color-accent: #7C3AED;
+  --color-accent-hover: #6D28D9;
+  --color-accent-light: #1E1040;
+  --color-accent-cyan: #06B6D4;
+  --color-accent-cyan-light: #0E2A33;
+
+  /* ── Glow / FX ── */
+  --glow-purple: rgba(124, 58, 237, 0.18);
+  --glow-cyan: rgba(6, 182, 212, 0.15);
+  --glow-red: rgba(239, 68, 68, 0.18);
+  --gradient-hero: linear-gradient(135deg, #0D0D14 0%, #1A0533 50%, #0D0D14 100%);
+  --grid-line-color: rgba(42, 37, 64, 0.7);
+
+  /* ── Severity ── */
+  --color-critical: #EF4444;
+  --color-critical-bg: rgba(239, 68, 68, 0.12);
+  --color-critical-border: rgba(239, 68, 68, 0.35);
+  --color-high: #F97316;
+  --color-high-bg: rgba(249, 115, 22, 0.12);
+  --color-high-border: rgba(249, 115, 22, 0.35);
+  --color-medium: #F59E0B;
+  --color-medium-bg: rgba(245, 158, 11, 0.12);
+  --color-medium-border: rgba(245, 158, 11, 0.35);
+  --color-low: #06B6D4;
+  --color-low-bg: rgba(6, 182, 212, 0.10);
+  --color-low-border: rgba(6, 182, 212, 0.30);
+  --color-healthy: #10B981;
+  --color-healthy-bg: rgba(16, 185, 129, 0.10);
+
+  /* ── Status ── */
+  --color-up: #10B981;
+  --color-down: #EF4444;
+  --color-degraded: #F59E0B;
+  --color-unknown: #64748B;
+
+  /* ── Spacing ── */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
-  
-  /* Typography */
+
+  /* ── Typography ── */
   --font-sans: 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --text-xs: 11px;
@@ -62,18 +76,20 @@
   --text-xl: 20px;
   --text-2xl: 24px;
   --text-3xl: 30px;
-  
-  /* Layout */
+
+  /* ── Layout ── */
   --sidebar-width: 240px;
   --topbar-height: 52px;
   --border-radius: 6px;
   --border-radius-sm: 4px;
-  --border-radius-lg: 8px;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-lg: 0 4px 16px rgba(0,0,0,0.10);
+  --border-radius-lg: 10px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.6);
+  --shadow-glow-purple: 0 0 20px rgba(124,58,237,0.18);
+  --shadow-glow-cyan: 0 0 20px rgba(6,182,212,0.15);
 }
 
 *, *::before, *::after {
@@ -110,16 +126,15 @@ input, select, textarea {
   font-size: var(--text-base);
 }
 
-/* Scrollbars */
-::-webkit-scrollbar { width: 6px; height: 6px; }
+/* ── Scrollbars ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
 
-/* Mono text */
+/* ── Utility classes ── */
 .mono { font-family: var(--font-mono); }
 
-/* Layout utilities */
 .flex { display: flex; }
 .flex-col { display: flex; flex-direction: column; }
 .items-center { align-items: center; }
@@ -135,8 +150,8 @@ input, select, textarea {
 .w-full { width: 100%; }
 .h-full { height: 100%; }
 
-/* Text utilities */
-.text-muted { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-secondary { color: var(--color-text-secondary); }
 .text-xs { font-size: var(--text-xs); }
 .text-sm { font-size: var(--text-sm); }
 .text-md { font-size: var(--text-md); }
@@ -145,7 +160,7 @@ input, select, textarea {
 .font-semibold { font-weight: 600; }
 .font-bold { font-weight: 700; }
 
-/* Surfaces */
+/* ── Surfaces ── */
 .surface {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -158,28 +173,46 @@ input, select, textarea {
   border-radius: var(--border-radius-sm);
 }
 
-/* Severity badge colors */
+/* ── Severity badge base colors ── */
 .severity-critical { background: var(--color-critical-bg); color: var(--color-critical); border-color: var(--color-critical-border); }
-.severity-high { background: var(--color-high-bg); color: var(--color-high); border-color: var(--color-high-border); }
-.severity-medium { background: var(--color-medium-bg); color: var(--color-medium); border-color: var(--color-medium-border); }
-.severity-low { background: var(--color-low-bg); color: var(--color-low); border-color: var(--color-low-border); }
+.severity-high     { background: var(--color-high-bg);     color: var(--color-high);     border-color: var(--color-high-border); }
+.severity-medium   { background: var(--color-medium-bg);   color: var(--color-medium);   border-color: var(--color-medium-border); }
+.severity-low      { background: var(--color-low-bg);      color: var(--color-low);      border-color: var(--color-low-border); }
 
-/* Status colors */
-.status-up { color: var(--color-up); }
-.status-down { color: var(--color-down); }
+/* ── Status colors ── */
+.status-up       { color: var(--color-up); }
+.status-down     { color: var(--color-down); }
 .status-degraded { color: var(--color-degraded); }
-.status-unknown { color: var(--color-unknown); }
+.status-unknown  { color: var(--color-unknown); }
 
-/* Pulse animation for live indicator */
+/* ── Animations ── */
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.4; }
 }
 .pulse { animation: pulse 2s infinite; }
 
-/* Fade in */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.2s ease-out; }
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Cyber grid background helper ── */
+.cyber-grid {
+  background-image:
+    linear-gradient(var(--grid-line-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+}

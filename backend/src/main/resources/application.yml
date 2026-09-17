@@ -1,10 +1,10 @@
-spring:
+﻿spring:
   application:
-    name: nexus-soc-backend
+    name: dartnet-backend
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/nexussoc}
-    username: ${SPRING_DATASOURCE_USERNAME:nexussoc}
-    password: ${SPRING_DATASOURCE_PASSWORD:nexussoc_secret}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/dartnet}
+    username: ${SPRING_DATASOURCE_USERNAME:dartnet}
+    password: ${SPRING_DATASOURCE_PASSWORD:dartnet_secret}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 20
@@ -47,9 +47,27 @@ alert:
   id-prefix: ALT
   sequence-start: 1
 
+# Detection thresholds — all configurable via env or override in application-prod.yml
+detection:
+  ddos:
+    flow-rate-threshold: 100.0
+    syn-ratio-threshold: 0.8
+  port-scan:
+    min-ports: 20
+    min-hosts: 5
+  dns:
+    entropy-threshold: 3.5
+    min-query-length: 20
+  c2:
+    periodicity-threshold: 0.7
+  exfil:
+    ratio-threshold: 10.0
+  alert:
+    min-confidence: 0.5
+
 logging:
   level:
-    com.nexussoc: INFO
+    com.dartnet: INFO
     org.springframework.web: WARN
     org.hibernate: WARN
   pattern:

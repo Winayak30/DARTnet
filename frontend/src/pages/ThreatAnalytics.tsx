@@ -6,33 +6,43 @@ import { fetchAlerts } from '../api/client';
 const THREAT_CARDS = [
   {
     id: 'ddos', path: '/threat-analytics/ddos', title: 'DDoS / Flooding',
-    desc: 'Volumetric attacks — SYN floods, UDP floods. Detected via flow rate, SYN ratio, source distribution.',
-    color: '#dc2626', threatClass: 'SYN_FLOOD',
+    desc: 'Volumetric attacks — SYN floods, UDP floods. RandomForest trained on CICIDS2017. 99.97% F1.',
+    color: '#EF4444', threatClass: 'SYN_FLOOD',
+  },
+  {
+    id: 'dos', path: '/threat-analytics/dos', title: 'DoS Attacks',
+    desc: 'Resource-exhaustion attacks — Hulk, GoldenEye, Slowloris. Sustained low-packet-rate flooding. 99.76% F1.',
+    color: '#F87171', threatClass: 'DOS_ATTACK',
   },
   {
     id: 'port-scan', path: '/threat-analytics/port-scan', title: 'Port Scanning',
-    desc: 'Reconnaissance via systematic port sweeps. Detected by destination port diversity and fan-out.',
-    color: '#ea580c', threatClass: 'PORT_SCAN',
+    desc: 'Reconnaissance via systematic port sweeps. Detected by destination port diversity and fan-out. 99.43% F1.',
+    color: '#F97316', threatClass: 'PORT_SCAN',
+  },
+  {
+    id: 'brute-force', path: '/threat-analytics/brute-force', title: 'Brute Force',
+    desc: 'Automated credential guessing — FTP-Patator, SSH-Patator. Repeated low-byte-volume connections. 99.89% F1.',
+    color: '#FB923C', threatClass: 'BRUTE_FORCE',
+  },
+  {
+    id: 'web-attacks', path: '/threat-analytics/web-attacks', title: 'Web Attacks',
+    desc: 'Application-layer attacks — XSS, SQLi, Brute Force over HTTP. Detected by HTTP flow patterns. 98.48% F1.',
+    color: '#FBBF24', threatClass: 'WEB_ATTACK',
+  },
+  {
+    id: 'c2', path: '/threat-analytics/c2', title: 'C2 / Bots',
+    desc: 'C2 beaconing and bot traffic. Periodic low-volume connections consistent with malware check-ins. 38.99% F1 (low — see notes).',
+    color: '#A78BFA', threatClass: 'C2_BEACON',
   },
   {
     id: 'dns-dga', path: '/threat-analytics/dns-dga', title: 'DNS / DGA',
-    desc: 'DNS tunneling and domain generation algorithms. Detected via entropy and n-gram analysis.',
-    color: '#d97706', threatClass: 'DNS_TUNNEL',
-  },
-  {
-    id: 'c2', path: '/threat-analytics/c2', title: 'C2 Beaconing',
-    desc: 'Command-and-control communication. Detected by periodicity analysis of connection intervals.',
-    color: '#7c3aed', threatClass: 'C2_BEACON',
+    desc: 'DNS tunneling and domain generation algorithms. Rule-based entropy + n-gram analysis (CICIDS2017 has no DNS metadata).',
+    color: '#F59E0B', threatClass: 'DNS_TUNNEL',
   },
   {
     id: 'exfiltration', path: '/threat-analytics/exfiltration', title: 'Data Exfiltration',
-    desc: 'Unauthorized data transfer. Detected by asymmetric inbound/outbound byte ratios.',
-    color: '#0891b2', threatClass: 'DATA_EXFILTRATION',
-  },
-  {
-    id: 'encrypted', path: '/threat-analytics/encrypted', title: 'Encrypted Traffic',
-    desc: 'TLS/QUIC metadata analysis. Payload NOT inspected. Metadata-only behavioral analysis.',
-    color: '#4f46e5', threatClass: 'ENCRYPTED_ANOMALY',
+    desc: 'Unauthorized outbound data transfer. Detected by asymmetric inbound/outbound byte ratios.',
+    color: '#06B6D4', threatClass: 'DATA_EXFILTRATION',
   },
 ];
 

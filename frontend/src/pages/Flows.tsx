@@ -56,7 +56,7 @@ export default function FlowsPage() {
                 <td style={{ fontSize: 12 }}>{formatBytes(flow.byteCount)}</td>
                 <td style={{ fontSize: 12 }}>{formatDuration(flow.durationMs)}</td>
                 <td>
-                  <div style={{ width: 60, height: 4, background: '#e5e7eb', borderRadius: 2 }}>
+                  <div style={{ width: 60, height: 4, background: 'var(--color-surface-3)', borderRadius: 2 }}>
                     <div style={{
                       width: `${Math.min(100, (flow.threatScore ?? 0) * 100)}%`,
                       height: '100%',
@@ -73,9 +73,9 @@ export default function FlowsPage() {
         {isLoading && <div style={{ padding: 20, textAlign: 'center', color: 'var(--color-text-muted)' }}>Loading flows...</div>}
       </div>
 
-      <div style={{ padding: '10px 16px', borderTop: '1px solid var(--color-border)', background: '#fff', display: 'flex', gap: 8 }}>
+      <div style={{ padding: '10px 16px', borderTop: '1px solid var(--color-border)', background: 'var(--color-surface)', display: 'flex', gap: 8 }}>
         <button className="btn btn-outline" disabled={page === 0} onClick={() => setPage(p => p - 1)}>← Prev</button>
-        <span style={{ alignSelf: 'center', fontSize: 13, color: 'var(--color-text-secondary)' }}>
+        <span style={{ alignSelf: 'center', fontSize: 13, color: 'var(--color-text-muted)' }}>
           Page {page + 1} · {data?.totalElements ?? 0} total flows
         </span>
         <button className="btn btn-outline" disabled={!data || page >= data.totalPages - 1} onClick={() => setPage(p => p + 1)}>Next →</button>

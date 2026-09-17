@@ -1,75 +1,92 @@
 version: "3.9"
 
 services:
+
+  # ── PostgreSQL ───────────────────────────────────────────────────────────────
   postgres:
     image: postgres:15-alpine
-    container_name: nexussoc-postgres
+    container_name: dartnet-postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: nexussoc
-      POSTGRES_USER: nexussoc
-      POSTGRES_PASSWORD: nexussoc_secret
+      POSTGRES_DB: dartnet
+      POSTGRES_USER: dartnet
+      POSTGRES_PASSWORD: dartnet_secret
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U nexussoc"]
+      test: ["CMD-SHELL", "pg_isready -U dartnet"]
       interval: 10s
       timeout: 5s
       retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 512m
 
+  # ── ML Service (CICIDS2017 ThreatDetector) ───────────────────────────────────
   ml-service:
     build:
-      context: ./ml-service
-      dockerfile: Dockerfile
-    container_name: nexussoc-ml
+      # Context is repo root so Dockerfile can COPY ml-repo/src and ml-repo/models
+      context: .
+      dockerfile: ml-service/Dockerfile
+    container_name: dartnet-ml
+    restart: unless-stopped
     environment:
-      MODEL_DIR: /app/models
+      MODEL_DIR: /app/ml-repo/models
+      ML_REPO_SRC: /app/ml-repo/src
       LOG_LEVEL: INFO
+      PYTHONUNBUFFERED: "1"
     ports:
       - "8000:8000"
-    volumes:
-      - ./models:/app/models
-      - ./data:/app/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 15s
-      timeout: 5s
-      retries: 5
-    depends_on:
-      postgres:
-        condition: service_healthy
+      timeout: 10s
+      retries: 8
+      start_period: 30s   # give model time to load before first check
+    deploy:
+      resources:
+        limits:
+          memory: 2g      # RF model + pandas can use up to ~1.5GB
 
+  # ── Spring Boot Backend ──────────────────────────────────────────────────────
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: nexussoc-backend
+    container_name: dartnet-backend
+    restart: unless-stopped
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/nexussoc
-      SPRING_DATASOURCE_USERNAME: nexussoc
-      SPRING_DATASOURCE_PASSWORD: nexussoc_secret
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dartnet
+      SPRING_DATASOURCE_USERNAME: dartnet
+      SPRING_DATASOURCE_PASSWORD: dartnet_secret
       ML_SERVICE_URL: http://ml-service:8000
       PCAP_DATA_DIR: /app/data/pcap
-      MODEL_DIR: /app/models
       REPLAY_DEFAULT_SPEED: 1
     ports:
       - "8080:8080"
     volumes:
       - ./data:/app/data
-      - ./models:/app/models
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 15s
       timeout: 5s
       retries: 10
+      start_period: 30s
     depends_on:
       postgres:
         condition: service_healthy
       ml-service:
         condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 768m    # 512m heap + 256m metaspace/overhead
 
+  # ── React Frontend (nginx) ───────────────────────────────────────────────────
   frontend:
     build:
       context: ./frontend
@@ -78,12 +95,17 @@ services:
         VITE_API_BASE_URL: http://localhost:8080
         VITE_WS_BASE_URL: ws://localhost:8080
         VITE_DATA_MODE: api
-    container_name: nexussoc-frontend
+    container_name: dartnet-frontend
+    restart: unless-stopped
     ports:
       - "3000:80"
     depends_on:
       backend:
         condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 128m    # nginx serving static files is very light
 
 volumes:
   pgdata:

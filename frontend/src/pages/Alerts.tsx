@@ -56,7 +56,7 @@ export default function AlertsPage() {
       </div>
 
       {/* Severity summary */}
-      <div style={{ display: 'flex', gap: 8, padding: '12px 16px', borderBottom: '1px solid var(--color-border)', background: '#fff' }}>
+      <div style={{ display: 'flex', gap: 8, padding: '12px 16px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
         {Object.entries(severityCounts).map(([sev, count]) => (
           <div
             key={sev}
@@ -65,7 +65,7 @@ export default function AlertsPage() {
               padding: '6px 14px',
               border: '1px solid var(--color-border)',
               borderRadius: 6, cursor: 'pointer',
-              background: severity === sev ? 'var(--color-surface-2)' : '#fff',
+              background: severity === sev ? 'var(--color-surface-3)' : 'var(--color-surface-2)',
             }}
             onClick={() => setSeverity(severity === sev ? '' : sev)}
           >
@@ -81,7 +81,7 @@ export default function AlertsPage() {
       </div>
 
       {/* Filter bar */}
-      <div style={{ padding: '10px 16px', background: '#fff', borderBottom: '1px solid var(--color-border)', display: 'flex', gap: 8, alignItems: 'center' }}>
+      <div style={{ padding: '10px 16px', background: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', display: 'flex', gap: 8, alignItems: 'center' }}>
         <input
           className="filter-input"
           placeholder="Search IP, threat, alert ID..."
@@ -116,9 +116,9 @@ export default function AlertsPage() {
       </div>
 
       {/* Pagination */}
-      <div style={{ padding: '10px 16px', borderTop: '1px solid var(--color-border)', background: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ padding: '10px 16px', borderTop: '1px solid var(--color-border)', background: 'var(--color-surface)', display: 'flex', alignItems: 'center', gap: 8 }}>
         <button className="btn btn-outline" disabled={page === 0} onClick={() => setPage(p => p - 1)}>← Prev</button>
-        <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+        <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
           Page {page + 1} of {totalPages}
         </span>
         <button className="btn btn-outline" disabled={page >= totalPages - 1} onClick={() => setPage(p => p + 1)}>Next →</button>

@@ -119,7 +119,7 @@ export default function ModelsPage() {
                   </>
                 )}
 
-                <div style={{ marginTop: 16, padding: 12, background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 6, fontSize: 12, color: '#92400e' }}>
+                <div style={{ marginTop: 16, padding: 12, background: 'rgba(245, 158, 11, 0.08)', border: '1px solid var(--color-medium-border)', borderRadius: 6, fontSize: 12, color: 'var(--color-medium)' }}>
                   <strong>Limitations:</strong> {selected.limitations || 
                     'Models trained on synthetic data. Performance on real-world traffic may differ. ' +
                     'Recommend validation against actual captured traffic before production use.'

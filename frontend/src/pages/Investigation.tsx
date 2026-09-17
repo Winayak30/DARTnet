@@ -65,7 +65,7 @@ export default function InvestigationPage() {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       {/* Header */}
-      <div style={{ padding: '16px 24px', background: '#fff', borderBottom: '1px solid var(--color-border)' }}>
+      <div style={{ padding: '16px 24px', background: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
@@ -103,7 +103,7 @@ export default function InvestigationPage() {
       </div>
 
       {/* Tabs */}
-      <div className="tabs" style={{ background: '#fff' }}>
+      <div className="tabs" style={{ background: 'var(--color-surface-2)' }}>
         {['overview', 'evidence', 'flow-context', 'timeline', 'related'].map(tab => (
           <div
             key={tab}

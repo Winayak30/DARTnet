@@ -58,9 +58,13 @@ export const Sidebar: React.FC = () => {
       <div className="sidebar-brand">
         <div className="sidebar-logo">
           <span className="sidebar-logo-icon">⬡</span>
-          <div>
-            <div className="sidebar-product-name">NEXUS SOC</div>
+          <div className="sidebar-brand-text">
+            <div className="sidebar-product-name">DARTNet</div>
             <div className="sidebar-product-sub">Passive Network Threat Detection</div>
+          </div>
+          <div className="sidebar-live-badge">
+            <span className="sidebar-live-dot" />
+            LIVE
           </div>
         </div>
       </div>

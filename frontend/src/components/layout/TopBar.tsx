@@ -14,6 +14,8 @@ export const TopBar: React.FC = () => {
     queryKey: ['replay-status'],
     queryFn: fetchReplayStatus,
     refetchInterval: 2000,
+    retry: false,
+    throwOnError: false,
   });
 
   const currentStatus = replayStatus ?? replayState;

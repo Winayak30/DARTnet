@@ -1,7 +1,7 @@
 /**
  * Canonical TypeScript types shared across the entire frontend.
  * These MUST match the Java DTOs exactly.
- * SIH26145 - NEXUS SOC
+ * SIH26145 - DARTNet
  */
 
 // ── Alert schema (canonical) ──────────────────────────────────────────────────
@@ -9,12 +9,15 @@
 export type Severity = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
 export type AlertStatus = 'NEW' | 'ACKNOWLEDGED' | 'INVESTIGATING' | 'RESOLVED';
 export type ThreatClass =
-  | 'SYN_FLOOD'
-  | 'PORT_SCAN'
-  | 'DNS_TUNNEL'
-  | 'C2_BEACON'
-  | 'DATA_EXFILTRATION'
-  | 'ENCRYPTED_ANOMALY';
+  | 'SYN_FLOOD'         // model: DDoS
+  | 'PORT_SCAN'         // model: Port Scanning
+  | 'DOS_ATTACK'        // model: DoS
+  | 'C2_BEACON'         // model: Bots (beaconing) + rule-based C2
+  | 'BRUTE_FORCE'       // model: Brute Force
+  | 'WEB_ATTACK'        // model: Web Attacks
+  | 'DNS_TUNNEL'        // rule-based (CICIDS2017 has no DNS metadata)
+  | 'DATA_EXFILTRATION' // rule-based exfil
+  | 'ENCRYPTED_ANOMALY';// rule-based encrypted (kept for compat)
 
 export interface ThreatAlert {
   id: string;
@@ -68,10 +71,14 @@ export interface OverviewData {
   criticalAlerts: number;
   detectionLatencyMs: number;
   throughputMbps: number;
+  // ml-repo 7 classes
   ddosCount: number;
+  dosCount: number;
   portScanCount: number;
-  dnsDgaCount: number;
+  bruteForceCount: number;
+  webAttackCount: number;
   c2Count: number;
+  dnsDgaCount: number;
   exfiltrationCount: number;
   encryptedCount: number;
   ingestionStatus: string;

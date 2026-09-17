@@ -43,17 +43,17 @@ export const AlertTable: React.FC<AlertTableProps> = ({
               className={`data-row ${selectedId === alert.id ? 'selected' : ''}`}
               onClick={() => onSelectAlert(alert.id)}
             >
-              <td className="mono" style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
+              <td className="mono" style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>
                 {formatTimestamp(alert.timestamp)}
               </td>
               <td>
-                <span style={{ fontWeight: 500, fontSize: 13 }}>
+                <span className="threat-label">
                   {formatThreatClass(alert.threatClass)}
                 </span>
               </td>
-              <td className="mono" style={{ fontSize: 12 }}>{formatIp(alert.sourceIp)}</td>
-              <td className="mono" style={{ fontSize: 12 }}>{formatIp(alert.destinationIp)}</td>
-              <td style={{ fontSize: 12 }}>{alert.protocol}</td>
+              <td className="ip-value">{formatIp(alert.sourceIp)}</td>
+              <td className="ip-value">{formatIp(alert.destinationIp)}</td>
+              <td style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>{alert.protocol}</td>
               <td style={{ minWidth: 120 }}>
                 <ConfidenceBar confidence={alert.confidence} />
               </td>
@@ -73,10 +73,7 @@ export const AlertTable: React.FC<AlertTableProps> = ({
 const TableSkeleton: React.FC = () => (
   <div style={{ padding: 16 }}>
     {[1, 2, 3, 4, 5].map(i => (
-      <div key={i} style={{
-        height: 36, background: '#f3f4f6', borderRadius: 4, marginBottom: 6,
-        animation: 'pulse 1.5s infinite',
-      }} />
+      <div key={i} className="skeleton" style={{ height: 36, marginBottom: 6 }} />
     ))}
   </div>
 );

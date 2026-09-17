@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NEXUS SOC | AI Threat Detection</title>
-    <meta name="description" content="NEXUS SOC - AI-Based Detection of Cyber Threats in Unidirectional IP Traffic. SIH26145 | NTRO" />
+    <title>DARTNet | AI Threat Detection</title>
+    <meta name="description" content="DARTNet - AI-Based Detection of Cyber Threats in Unidirectional IP Traffic. SIH26145 | NTRO" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Prevent flash of white before CSS loads -->
+    <style>
+      html, body, #root { background: #0D0D14; margin: 0; padding: 0; height: 100%; }
+    </style>
+    <!-- Polyfill Node globals required by sockjs-client -->
+    <script>window.global = window; window.process = window.process || { env: {} };</script>
   </head>
   <body>
     <div id="root"></div>

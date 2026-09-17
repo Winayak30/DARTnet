@@ -1,24 +1,9 @@
--- V2: Seed initial model registry data
+-- V2: Seed model registry — unified CICIDS2017 model (ml-repo)
 INSERT INTO model_versions (name, version, model_type, threat_class, dataset, features_json, metrics_json, file_path, is_active)
 VALUES
-  ('ddos', 'v1.0', 'RandomForest', 'SYN_FLOOD', 'SYNTHETIC',
-   '["flow_rate","packet_rate","syn_ratio","unique_source_ips","source_entropy","dest_concentration","mean_packet_size","packets","bytes","duration_ms","syn_count"]',
-   '{"precision":0.967,"recall":0.951,"f1":0.959,"false_positive_rate":0.032}',
-   'models/ddos_model.joblib', true),
-  ('portscan', 'v1.0', 'RandomForest', 'PORT_SCAN', 'SYNTHETIC',
-   '["unique_dest_ports","unique_dest_hosts","fan_out","connection_rate","failed_connections","syn_without_ack","packet_count","duration_ms"]',
-   '{"precision":0.981,"recall":0.974,"f1":0.977,"false_positive_rate":0.019}',
-   'models/portscan_model.joblib', true),
-  ('dns_dga', 'v1.0', 'RandomForest', 'DNS_TUNNEL', 'SYNTHETIC',
-   '["domain_length","entropy","digit_ratio","consonant_ratio","unique_char_ratio","ngram_anomaly_score","query_rate","subdomain_depth","tld_suspicion"]',
-   '{"precision":0.943,"recall":0.929,"f1":0.936,"false_positive_rate":0.057}',
-   'models/dns_dga_model.joblib', true),
-  ('c2', 'v1.0', 'XGBoost', 'C2_BEACON', 'SYNTHETIC',
-   '["mean_inter_arrival_ms","inter_arrival_variance","periodicity_score","connection_count","unique_dest_count","flow_duration_ms","bytes_per_flow","small_packet_ratio"]',
-   '{"precision":0.958,"recall":0.946,"f1":0.952,"false_positive_rate":0.042}',
-   'models/c2_model.joblib', true),
-  ('exfil', 'v1.0', 'RandomForest', 'DATA_EXFILTRATION', 'SYNTHETIC',
-   '["outbound_bytes","inbound_bytes","outbound_inbound_ratio","flow_duration_ms","dest_concentration","transfer_rate_bps","burst_count"]',
-   '{"precision":0.934,"recall":0.918,"f1":0.926,"false_positive_rate":0.066}',
-   'models/exfil_model.joblib', true)
+  ('dartnet-unified', 'ml-v1', 'RandomForest+IsolationForest', 'UNIFIED',
+   'CICIDS2017',
+   '["Destination Port","Flow Duration","Total Fwd Packets","Total Length of Fwd Packets","Fwd Packet Length Max","Fwd Packet Length Min","Fwd Packet Length Mean","Fwd Packet Length Std","Bwd Packet Length Max","Bwd Packet Length Min","Bwd Packet Length Mean","Bwd Packet Length Std","Flow Bytes/s","Flow Packets/s","Flow IAT Mean","Flow IAT Std","Flow IAT Max","Flow IAT Min","Fwd IAT Total","Fwd IAT Mean","Fwd IAT Std","Fwd IAT Max","Fwd IAT Min","Bwd IAT Total","Bwd IAT Mean","Bwd IAT Std","Bwd IAT Max","Bwd IAT Min","Fwd Header Length","Bwd Header Length","Fwd Packets/s","Bwd Packets/s","Min Packet Length","Max Packet Length","Packet Length Mean","Packet Length Std","Packet Length Variance","FIN Flag Count","PSH Flag Count","ACK Flag Count","Average Packet Size","Subflow Fwd Bytes","Init_Win_bytes_forward","Init_Win_bytes_backward","act_data_pkt_fwd","min_seg_size_forward","Active Mean","Active Max","Active Min","Idle Mean","Idle Max","Idle Min"]',
+   '{"accuracy":0.9968,"weighted_f1":0.9975,"macro_f1":0.909,"trained_rows":2014144,"test_rows":503537}',
+   'ml-repo/models/threat_classifier.joblib', true)
 ON CONFLICT (name, version) DO NOTHING;

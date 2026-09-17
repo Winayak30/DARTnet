@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    global: 'globalThis',                                    // sockjs-client polyfill
+    __APP_VERSION__: JSON.stringify('1.0.0-SIH26145'),
+  },
   server: {
     port: 3000,
     proxy: {
@@ -20,8 +24,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-  },
-  define: {
-    __APP_VERSION__: JSON.stringify('1.0.0-SIH26145'),
   },
 })

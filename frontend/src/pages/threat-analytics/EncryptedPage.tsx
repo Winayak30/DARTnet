@@ -94,7 +94,7 @@ export default function EncryptedPage() {
             ))}
           </div>
           <div style={{ padding: '0 16px 16px', fontSize: 12, color: 'var(--color-text-muted)' }}>
-            NEXUS SOC operates as a passive observation system. Encrypted traffic analysis
+            DARTNet operates as a passive observation system. Encrypted traffic analysis
             is limited to observable network-layer metadata. This is a permanent architectural
             constraint, not a configurable setting.
           </div>

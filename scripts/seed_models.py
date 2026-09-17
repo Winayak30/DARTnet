@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-NEXUS SOC - Seed database with model information.
+DARTNet - Seed database with model information.
 Run after database is initialized.
 """
 
@@ -12,9 +12,9 @@ from pathlib import Path
 
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = int(os.getenv("DB_PORT", "5432"))
-DB_NAME = os.getenv("DB_NAME", "nexussoc")
-DB_USER = os.getenv("DB_USER", "nexussoc")
-DB_PASS = os.getenv("DB_PASS", "nexussoc_secret")
+DB_NAME = os.getenv("DB_NAME", "dartnet")
+DB_USER = os.getenv("DB_USER", "dartnet")
+DB_PASS = os.getenv("DB_PASS", "dartnet_secret")
 
 MODELS = [
     {
