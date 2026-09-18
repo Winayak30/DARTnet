@@ -26,7 +26,4 @@ ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
 
-HEALTHCHECK --interval=15s --timeout=5s --retries=5 \
-    CMD-SHELL curl -f http://localhost:${PORT:-8000}/health || exit 1
-
 CMD ["sh", "-c", "exec uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]
