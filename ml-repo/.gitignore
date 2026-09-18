@@ -15,6 +15,5 @@ __pycache__/
 *.pyc
 
 # Models
-models/*.joblib
 !models/threat_classifier.joblib
 !models/anomaly_detector.joblib

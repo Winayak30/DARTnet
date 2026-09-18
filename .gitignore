@@ -72,6 +72,7 @@ Thumbs.db
 secrets/
 
 # --- ml-repo specific ---------------------------------------------------------
-ml-repo/models/*.joblib
 ml-repo/models/*.pkl
 ml-repo/.venv/
+!ml-repo/models/threat_classifier.joblib
+!ml-repo/models/anomaly_detector.joblib
