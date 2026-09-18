@@ -16,4 +16,5 @@ __pycache__/
 
 # Models
 models/*.joblib
-!models/.gitkeep
+!models/threat_classifier.joblib
+!models/anomaly_detector.joblib
